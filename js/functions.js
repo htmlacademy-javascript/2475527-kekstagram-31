@@ -11,8 +11,9 @@
 
 function checkLength (string = '', length) {
   return (string.length <= length);
-};
+}
 
+checkLength ();
 
 /*
 Функция для проверки, является ли строка палиндромом. Палиндром — это слово или фраза, которые одинаково читаются и слева направо и справа налево. Например:
@@ -30,8 +31,10 @@ function checkLength (string = '', length) {
 имяФункции('Лёша на полке клопа нашёл '); // true
 */
 
-const checkingPalindrome = (string = '') => {
-  let normalizedString = string.replaceAll(' ', '').toLowerCase();
-  let reversedString = normalizedString.split('').reverse().join('');
+const checkPalindrome = (string = '') => {
+  const normalizedString = string.replaceAll(' ', '').toLowerCase();
+  const reversedString = normalizedString.split('').reverse().join('');
   return reversedString === normalizedString;
 };
+
+checkPalindrome ();
