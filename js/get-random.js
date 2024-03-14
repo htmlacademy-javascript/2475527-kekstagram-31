@@ -9,7 +9,7 @@ function getRandomInteger (min, max) {
 
 // Функция создания уникального числа
 const getUniqueNumber = () => {
-  let number = 0;
+  let number = 1;
   return function () {
     return number++;
   };

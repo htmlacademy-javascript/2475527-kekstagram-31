@@ -1,3 +1,4 @@
-import {photoDescription} from './data.js';
+import { photoDescription } from './data.js';
+import { similarPhoto, pictureContainer } from './render-photos.js';
 
-photoDescription();
+similarPhoto(photoDescription(pictureContainer));
