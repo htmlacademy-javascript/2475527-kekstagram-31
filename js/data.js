@@ -37,7 +37,7 @@ const createPhotoDescription = () => ({
   comments: Array.from({length: getRandomInteger(0, 30)}, createComment),
 });
 
-const photoDescription = Array.from({length: CREATE_POST}, createPhotoDescription);
-photoDescription();
+const photoDescription = () => Array.from({length: CREATE_POST}, createPhotoDescription);
+//photoDescription();
 
-export {photoDescription};
+export { photoDescription };
