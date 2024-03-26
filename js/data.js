@@ -40,4 +40,6 @@ const createPhotoDescription = () => ({
 const photoDescription = () => Array.from({length: CREATE_POST}, createPhotoDescription);
 //photoDescription();
 
-export { photoDescription };
+const COMMENTS_SHOW = 5;
+
+export { photoDescription, COMMENTS_SHOW };

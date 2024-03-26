@@ -1,5 +1,6 @@
 import { isEscapeKey } from './util.js';
 import { similarPhoto } from './render-photos.js';
+import { clearComments, renderComments } from './render-comments.js';
 
 const body = document.querySelector('body');
 const pictureContainer = document.querySelector('.pictures');
@@ -27,7 +28,7 @@ const openBigPhoto = (pictureId) => {
   bigPhotoImg.src = currentPhoto.url;
   photoLikes.textContent = currentPhoto.likes;
   socialCaption.textContent = currentPhoto.description;
-
+  renderComments(currentPhoto.comments);
   modalBigPhoto.classList.remove('hidden');
   bigPhotoCancel.addEventListener('click', closeBigPhotoClick);
   body.classList.add('modal-open');
@@ -48,6 +49,7 @@ function closeBigPhoto () {
   modalBigPhoto.classList.add('hidden');
   bigPhotoCancel.removeEventListener('click', closeBigPhotoClick);
   document.removeEventListener('keydown', onDocumentKeydown);
+  clearComments();
 }
 
 export { openModalBigPhoto };
