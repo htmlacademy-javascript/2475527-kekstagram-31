@@ -1,4 +1,4 @@
-import { photoDescription } from './data.js';
-import { similarPhoto, pictureContainer } from './render-photos.js';
-
-similarPhoto(photoDescription(pictureContainer));
+import { renderPhotos } from './render-photos.js';
+import { openModalBigPhoto } from './render-big-photos.js';
+renderPhotos();
+openModalBigPhoto();

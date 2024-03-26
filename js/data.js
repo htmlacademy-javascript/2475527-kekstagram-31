@@ -1,4 +1,4 @@
-import {getRandomInteger, getUniqueNumber, getRandomArrayElement} from './get-random.js';
+import {getRandomInteger, getUniqueNumber, getRandomArrayElement} from './util.js';
 
 const NAMES = ['Валентина', 'Иван', 'Анна', 'Максим', 'Юлия', 'Александр', 'Марина', 'Ксения'];
 const MESSAGES = [
