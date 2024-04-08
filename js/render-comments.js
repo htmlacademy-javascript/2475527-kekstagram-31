@@ -1,4 +1,5 @@
-import { COMMENTS_SHOW } from './data.js';
+//import { COMMENTS_SHOW } from './data.js';
+const COMMENTS_SHOW = 5;
 
 const modalBigPhoto = document.querySelector('.big-picture');
 const socialComments = modalBigPhoto.querySelector('.social__comments');

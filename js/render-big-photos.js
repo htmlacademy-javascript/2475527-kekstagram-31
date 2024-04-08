@@ -1,55 +1,45 @@
 import { isEscapeKey } from './util.js';
-import { similarPhoto } from './render-photos.js';
 import { clearComments, renderComments } from './render-comments.js';
 
 const body = document.querySelector('body');
-const pictureContainer = document.querySelector('.pictures');
 const modalBigPhoto = document.querySelector('.big-picture');
-const bigPhotoImg = modalBigPhoto.querySelector('.big-picture__img img');
-const photoLikes = modalBigPhoto.querySelector('.likes-count');
-const socialCaption = modalBigPhoto.querySelector('.social__caption');
 const bigPhotoCancel = modalBigPhoto.querySelector('.big-picture__cancel');
+
+const openBigPhoto = ({url, likes, comments, description}) => {
+  const photo = modalBigPhoto.querySelector('.big-picture__img img');
+  photo.src = url;
+  photo.alt = description;
+  modalBigPhoto.querySelector('.likes-count').textContent = likes;
+  modalBigPhoto.querySelector('.social__caption').textContent = description;
+  modalBigPhoto.querySelector('.social__comment-total-count').textContent = comments.length;
+  renderComments(comments);
+};
+
+const onBigPhotoCancelBtn = () => {
+  closeModalBigPhoto();
+};
 
 const onDocumentKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
-    closeBigPhoto();
+    closeModalBigPhoto();
   }
 };
 
-const closeBigPhotoClick = (evt) => {
-  evt.preventDefault();
-  closeBigPhoto();
-};
-
-const openBigPhoto = (pictureId) => {
-  const currentPhoto = similarPhoto.find((photo) => photo.id === Number(pictureId));
-
-  bigPhotoImg.src = currentPhoto.url;
-  photoLikes.textContent = currentPhoto.likes;
-  socialCaption.textContent = currentPhoto.description;
-  renderComments(currentPhoto.comments);
-  modalBigPhoto.classList.remove('hidden');
-  bigPhotoCancel.addEventListener('click', closeBigPhotoClick);
-  body.classList.add('modal-open');
-  document.addEventListener('keydown', onDocumentKeydown);
-};
-
-const openModalBigPhoto = () => {
-  pictureContainer.addEventListener('click', (evt) => {
-    const currentPicture = evt.target.closest('.picture');
-    if (currentPicture) {
-      evt.preventDefault();
-      openBigPhoto(currentPicture.dataset.pictureId);
-    }
-  });
-};
-
-function closeBigPhoto () {
-  modalBigPhoto.classList.add('hidden');
-  bigPhotoCancel.removeEventListener('click', closeBigPhotoClick);
-  document.removeEventListener('keydown', onDocumentKeydown);
+function closeModalBigPhoto () {
   clearComments();
+  modalBigPhoto.classList.add('hidden');
+  body.classList.remove('modal-open');
+  bigPhotoCancel.removeEventListener('click', onBigPhotoCancelBtn);
+  document.removeEventListener('keydown', onDocumentKeydown);
+}
+
+function openModalBigPhoto (photo) {
+  modalBigPhoto.classList.remove('hidden');
+  body.classList.add('modal-open');
+  openBigPhoto(photo);
+  bigPhotoCancel.addEventListener('click', onBigPhotoCancelBtn);
+  document.addEventListener('keydown', onDocumentKeydown);
 }
 
 export { openModalBigPhoto };
