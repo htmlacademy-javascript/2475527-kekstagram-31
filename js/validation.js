@@ -1,11 +1,21 @@
+import { sendData } from './api.js';
+import { closeModal } from './form.js';
+import { showErrorModal, showSuccessModal } from './message.js';
+
 const HASHTAG = /^#[a-zа-яё0-9]{1,19}$/i;
 const MAX_HASHTAGS = 5;
 const MAX_SYMBOLS = 20;
 const MAX_LENGTH_COMMENT = 140;
 
+const submitButtonText = {
+  IDLE: 'Сохранить',
+  SENDING: 'Сохраняю...'
+};
+
 const form = document.querySelector('.img-upload__form');
 const hashtagsField = form.querySelector('.text__hashtags');
 const descriptionField = form.querySelector('.text__description');
+const submitButton = form.querySelector('.img-upload__submit');
 
 const pristine = new Pristine(form, {
   classTo: 'img-upload__field-wrapper',
@@ -45,12 +55,35 @@ const resetValidator = () => {
   pristine.reset();
 };
 
-const validateForm = () => {
+const blockSubmitButton = () => {
+  submitButton.disabled = true;
+  submitButton.textContent = submitButtonText.SENDING;
+};
+
+const unblockSubmitButton = () => {
+  submitButton.disabled = false;
+  submitButton.textContent = submitButtonText.IDLE;
+};
+
+const setFormSubmit = () => {
   form.addEventListener('submit', (evt) => {
-    if(!pristine.validate()) {
-      evt.preventDefault();
+    evt.preventDefault();
+
+    const isValid = pristine.validate();
+    if (isValid) {
+      blockSubmitButton();
+      sendData(new FormData(evt.target))
+        .then(() => {
+          showSuccessModal();
+          closeModal();
+        })
+        .catch(() => {
+          showErrorModal();
+        })
+        .finally(unblockSubmitButton);
     }
   });
 };
 
-export { validateForm, resetValidator };
+export { setFormSubmit, resetValidator };
+

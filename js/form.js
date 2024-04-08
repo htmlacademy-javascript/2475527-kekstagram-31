@@ -1,5 +1,5 @@
 import { isEscapeKey } from './util.js';
-import { validateForm, resetValidator } from './validation.js';
+import { resetValidator } from './validation.js';
 import { resetScale } from './scale.js';
 import { resetEffects } from './effects.js';
 
@@ -15,12 +15,14 @@ const isTextFieldFocused = () =>
   document.activeElement === fieldHashtags ||
   document.activeElement === fieldDescription;
 
+const isErrorMessageShown = () => Boolean(document.querySelector('.error'));
+
 const onUploadModalCloseClick = () => {
   closeModal();
 };
 
 function onDocumentKeydown(evt) {
-  if (isEscapeKey(evt) && !isTextFieldFocused()) {
+  if (isEscapeKey(evt) && !isTextFieldFocused() && !isErrorMessageShown()) {
     evt.preventDefault();
     closeModal();
   }
@@ -34,10 +36,7 @@ function openModal() {
 }
 
 function closeModal() {
-  uploadInput.value = '';
-  fieldHashtags.value = '';
-  fieldDescription.value = '';
-
+  form.reset();
   resetValidator();
   resetScale();
   resetEffects();
@@ -48,6 +47,5 @@ function closeModal() {
 
 uploadInput.addEventListener('change', openModal);
 
-validateForm();
-
+export { openModal, closeModal };
 
