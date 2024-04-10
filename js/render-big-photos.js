@@ -38,7 +38,6 @@ function openModalBigPhoto (photo) {
   modalBigPhoto.classList.remove('hidden');
   body.classList.add('modal-open');
   openBigPhoto(photo);
-  //bigPhotoCancel.addEventListener('click', onBigPhotoCancelBtn);
   document.addEventListener('keydown', onDocumentKeydown);
 }
 bigPhotoCancel.addEventListener('click', () => {
