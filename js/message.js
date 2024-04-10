@@ -2,9 +2,14 @@ import { isEscapeKey } from './util.js';
 
 const MESSAGE_SHOW_TIME = 5000;
 
-const showGalleryErrorMessage = () => {
-  const messageErrorTemplate = document.querySelector('#data-error').content;
+const messageErrorTemplate = document.querySelector('#data-error').content;
+
+const errorMessage = (err) => {
   const messageErrorContainer = messageErrorTemplate.cloneNode(true);
+
+  if (err) {
+    messageErrorContainer.querySelector('.data-error__title').textContent = err;
+  }
 
   document.body.append(messageErrorContainer);
 
@@ -63,4 +68,4 @@ const showSuccessModal = () => showModal('success');
 
 const showErrorModal = () => showModal('error');
 
-export { showGalleryErrorMessage, showSuccessModal, showErrorModal };
+export { errorMessage, showSuccessModal, showErrorModal };
