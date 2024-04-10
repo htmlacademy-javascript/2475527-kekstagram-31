@@ -42,10 +42,11 @@ function closeModal() {
   resetEffects();
   uploadOverlay.classList.add('hidden');
   body.classList.remove('modal-open');
+  uploadModalClose.removeEventListener('click', onUploadModalCloseClick);
   document.removeEventListener('keydown', onDocumentKeydown);
 }
 
 uploadInput.addEventListener('change', openModal);
 
-export { openModal, closeModal };
+export { closeModal };
 

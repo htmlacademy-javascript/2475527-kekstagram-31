@@ -19,12 +19,12 @@ const onBigPhotoCancelBtn = () => {
   closeModalBigPhoto();
 };
 
-const onDocumentKeydown = (evt) => {
+function onDocumentKeydown (evt) {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
     closeModalBigPhoto();
   }
-};
+}
 
 function closeModalBigPhoto () {
   clearComments();
@@ -38,8 +38,11 @@ function openModalBigPhoto (photo) {
   modalBigPhoto.classList.remove('hidden');
   body.classList.add('modal-open');
   openBigPhoto(photo);
-  bigPhotoCancel.addEventListener('click', onBigPhotoCancelBtn);
+  //bigPhotoCancel.addEventListener('click', onBigPhotoCancelBtn);
   document.addEventListener('keydown', onDocumentKeydown);
 }
+bigPhotoCancel.addEventListener('click', () => {
+  closeModalBigPhoto ();
+});
 
 export { openModalBigPhoto };

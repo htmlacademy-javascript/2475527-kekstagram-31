@@ -1,13 +1,15 @@
 import { getData } from './api.js';
-//import { openModalBigPhoto } from './render-big-photos.js';
 import { setFormSubmit } from './validation.js';
 import { showGalleryErrorMessage } from './message.js';
 import { renderPhotos } from './render-photos.js';
+import { increaseByClick } from './miniatures.js';
+import { initFilter } from './filters.js';
 
 getData()
   .then((photos) => {
-    //openModalBigPhoto(photos);
     renderPhotos(photos);
+    increaseByClick(photos);
+    initFilter(renderPhotos, photos);
   })
   .catch(() => {
     showGalleryErrorMessage();
