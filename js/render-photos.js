@@ -3,12 +3,16 @@ const templatePicture = document.querySelector('#picture').content.querySelector
 
 const createPhotos = ({ url, description, likes, comments, id }) => {
   const similarListPhoto = templatePicture.cloneNode(true);
+  const photo = similarListPhoto.querySelector('.picture__img');
+
+  photo.src = url;
+  photo.alt = description;
+
   similarListPhoto.href = url;
-  similarListPhoto.dataset.pictureId = id;
-  similarListPhoto.querySelector('.picture__img').src = url;
-  similarListPhoto.querySelector('.picture__img').alt = description;
-  similarListPhoto.querySelector('.picture__comments').textContent = comments.length;
+  similarListPhoto.dataset.id = id;
   similarListPhoto.querySelector('.picture__likes').textContent = likes;
+  similarListPhoto.querySelector('.picture__comments').textContent = comments.length;
+
   return similarListPhoto;
 };
 

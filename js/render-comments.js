@@ -48,3 +48,4 @@ const renderComments = (photoComments) => {
 };
 
 export {clearComments, renderComments};
+
