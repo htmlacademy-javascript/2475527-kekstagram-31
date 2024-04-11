@@ -1,4 +1,3 @@
-//import { COMMENTS_SHOW } from './data.js';
 const COMMENTS_SHOW = 5;
 
 let currentCount = 0;
